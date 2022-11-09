@@ -1,0 +1,39 @@
+#world-map-png {
+  width: 1200px;
+  height: 680px;
+  margin-left: 110px;
+}
+
+#data {
+  max-width: 1400px;
+  list-style: none;
+}
+
+.container {
+  padding: 25px;
+}
+
+.flag {
+  width: 100px;
+  margin-top: 35px;
+}
+
+.name {
+  font-size: 20px;
+}
+
+.container-data {
+  background-color: #f5f5f5;
+  border: 1px solid gray;
+  flex-wrap: wrap;
+  column-gap: 50px;
+  margin: 100px;
+  display: flex;
+}
+
+li {
+  max-height: 25px;
+  flex-wrap: wrap;
+}
+
+/*# sourceMappingURL=index.4d663569.css.map */
