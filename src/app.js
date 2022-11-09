@@ -18,7 +18,7 @@ async function fetchData() {
 
         // Iterate through data
         axiosResponse.data.map((response)=> {
-            //  Implement flag nto fragment
+            //  Implement flag into fragment
             const elementFlag = document.createElement('img');
             elementFlag.setAttribute("class", "flag");
             elementFlag.setAttribute("src", response.flag);
@@ -40,7 +40,7 @@ async function fetchData() {
             elementRegion.textContent = response.region;
             axiosResponseList.appendChild(elementRegion);
 
-            // Switch statement to styl color region
+            // Switch statement to style color region
             switch (response.region) {
                 case "Africa":
                     elementName.style.color = "blue";
