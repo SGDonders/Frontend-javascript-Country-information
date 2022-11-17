@@ -2,19 +2,25 @@
 <html lang="en">
 <head>
     <link rel="stylesheet" href="/index.4d663569.css">
-    <script defer="" src="/index.0641b553.js"></script>
     <meta charset="UTF-8">
     <title>Country Information - World Regions</title>
 </head>
-<body id="container">
-    <section>
+<body>
+    <header class="header">
+        <h1 id="page-title">World countries</h1>
         <img id="world-map-png" src="/world_map.34fa97b5.png" alt="">
-    </section>
+    </header>
+    <form id="search-form">
+        <button id="button">
+            <a href="/search.html" class="button">Find Country</a>
+        </button>
+    </form>
     <section class="container-data">
         <ul id="data"></ul>
     </section>
     <section class="container-error">
         <span id="error-msg"></span>
     </section>
+    <script src="/search.0641b553.js" defer=""></script>
 </body>
 </html>
