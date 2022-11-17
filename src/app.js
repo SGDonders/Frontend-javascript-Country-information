@@ -18,22 +18,27 @@ async function fetchData() {
 
         // Create document fragment
         const axiosResponseList = document.createDocumentFragment();
+
         // Iterate through data
         axiosResponse.data.map(({flag, name, population, region}) => {
+
             //  Implement flag into fragment
             const elementFlag = document.createElement('img');
             elementFlag.setAttribute("class", "flag");
             elementFlag.setAttribute("src", flag);
             axiosResponseList.appendChild(elementFlag);
+
             // Implement name into fragment
             const elementName = document.createElement('li');
             elementName.setAttribute("class", "name");
             elementName.textContent = name;
             axiosResponseList.appendChild(elementName);
+
             // Implement amount of population into fragment
             const elementPopulation = document.createElement('li');
             elementPopulation.textContent = `Has a population of ${population} people.`;
             axiosResponseList.appendChild(elementPopulation);
+
             // Implement region into fragment
             const elementRegion = document.createElement('li');
             elementRegion.textContent = region;
@@ -99,17 +104,20 @@ async function fetchSearchData(country) {
             const currenciesArray = currencies.map((coin) => {
                 return coin.name;
             })
+
             // String builder for currencies
             if (currencies.length === 1) {
                 coinString = `${currenciesArray[0]}`;
             } else {
                 coinString = `${currenciesArray[0]} and ${currenciesArray[1]}`;
             }
+
             // Iterate trough languages
             let languagesString;
             const languagesArray = languages.map((language) => {
                 return language.name;
             })
+
             // String builder for language
             if (languagesArray.length === 1) {
                 languagesString = `${languagesArray[0]}`;
@@ -121,29 +129,35 @@ async function fetchSearchData(country) {
 
             // Create document fragment
             const axiosSearchResponseList = document.createDocumentFragment();
+
             // Implement flag into fragment
             const elementFlag = document.createElement('img');
             elementFlag.setAttribute("class", "flag");
             elementFlag.setAttribute("src", flag);
             axiosSearchResponseList.appendChild(elementFlag);
+
             // Implement name into fragment
             const elementName = document.createElement('li');
             elementName.textContent = name;
             axiosSearchResponseList.appendChild(elementName);
+
             // Implement String about subregion and population into fragment
             const elementRegion = document.createElement('li');
             elementRegion.textContent = `${name} is situated in ${subregion}. 
                                      It has a population of ${population} people.`;
             axiosSearchResponseList.appendChild(elementRegion);
+
             // Implement capital into fragment
             const elementCurrencies = document.createElement('li');
             elementCurrencies.textContent = `The capital is ${capital} and you can pay 
                                          with ${coinString}`;
             axiosSearchResponseList.appendChild(elementCurrencies);
+
             // Implement language into fragment
             const elementLanguage = document.createElement('li');
             elementLanguage.textContent = `They speak ${languagesString}`
             axiosSearchResponseList.appendChild(elementLanguage);
+
             // Inject fragment into the DOM
             const container = document.getElementById('search-ul');
             container.appendChild(axiosSearchResponseList);
