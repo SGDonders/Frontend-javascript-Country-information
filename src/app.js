@@ -137,9 +137,10 @@ async function fetchSearchData(country) {
             axiosSearchResponseList.appendChild(elementFlag);
 
             // Implement name into fragment
-            const elementName = document.createElement('li');
+            const elementName = document.createElement('h4');
             elementName.textContent = name;
             axiosSearchResponseList.appendChild(elementName);
+
 
             // Implement String about subregion and population into fragment
             const elementRegion = document.createElement('li');

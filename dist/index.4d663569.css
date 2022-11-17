@@ -61,7 +61,7 @@ ul {
 .flag {
   max-width: 100px;
   max-height: 85px;
-  margin-top: 25px;
+  margin-top: 10px;
 }
 
 .name {
@@ -73,6 +73,11 @@ ul {
   background-color: #f5f5f5;
   border: 1px solid gray;
   margin-top: 50px;
+}
+
+h4 {
+  font-family: Segoe Print, serif;
+  font-size: 22px;
 }
 
 #img-search {
