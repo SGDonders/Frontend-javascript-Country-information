@@ -144,18 +144,18 @@ async function fetchSearchData(country) {
             // Implement String about subregion and population into fragment
             const elementRegion = document.createElement('li');
             elementRegion.textContent = `${name} is situated in ${subregion}. 
-                                     It has a population of ${population} people.`;
+                                         It has a population of ${population} people.`;
             axiosSearchResponseList.appendChild(elementRegion);
 
             // Implement capital into fragment
             const elementCurrencies = document.createElement('li');
-            elementCurrencies.textContent = `The capital is ${capital} and you can pay 
-                                         with ${coinString}`;
+            elementCurrencies.textContent = `The capital is ${capital} 
+                                             and you can pay with ${coinString}.`;
             axiosSearchResponseList.appendChild(elementCurrencies);
 
             // Implement language into fragment
             const elementLanguage = document.createElement('li');
-            elementLanguage.textContent = `They speak ${languagesString}`
+            elementLanguage.textContent = `They speak ${languagesString}.`
             axiosSearchResponseList.appendChild(elementLanguage);
 
             // Inject fragment into the DOM
