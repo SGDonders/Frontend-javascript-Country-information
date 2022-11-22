@@ -534,7 +534,6 @@ function hmrAcceptRun(bundle, id) {
 },{}],"bNKaB":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 // Importing axios
-// noinspection JSIgnoredPromiseFromCall
 var _axios = require("axios");
 var _axiosDefault = parcelHelpers.interopDefault(_axios);
 // OPDRACHT 1:
@@ -604,59 +603,65 @@ fetchData();
 const emptyList = document.getElementById("search-ul");
 const errorMessage = document.getElementById("error-search-msg");
 async function fetchSearchData(country) {
-    const axiosSearchResponse = await (0, _axiosDefault.default).get(`https://restcountries.com/v2/name/${country}`);
-    //console.log(axiosSearchResponse) //test output endpoint
-    // Empty list search result and error message
-    emptyList.replaceChildren();
-    errorMessage.replaceChildren();
-    // Fetch data from endpoint
-    axiosSearchResponse.data.map(({ capital , currencies , flag , name , population , subregion , languages  })=>{
-        // Iterate through currencies
-        let coinString;
-        const currenciesArray = currencies.map((coin)=>{
-            return coin.name;
+    try {
+        const axiosSearchResponse = await (0, _axiosDefault.default).get(`https://restcountries.com/v2/name/${country}`);
+        //console.log(axiosSearchResponse) //test output endpoint
+        // Empty list search result and error message
+        emptyList.replaceChildren();
+        errorMessage.replaceChildren();
+        // Fetch data from endpoint
+        axiosSearchResponse.data.map(({ capital , currencies , flag , name , population , subregion , languages  })=>{
+            // Iterate through currencies
+            let coinString;
+            const currenciesArray = currencies.map((coin)=>{
+                return coin.name;
+            });
+            // String builder for currencies
+            if (currencies.length === 1) coinString = `${currenciesArray[0]}`;
+            else coinString = `${currenciesArray[0]} and ${currenciesArray[1]}`;
+            // Iterate trough languages
+            let languagesString;
+            const languagesArray = languages.map((language)=>{
+                return language.name;
+            });
+            // String builder for language
+            if (languagesArray.length === 1) languagesString = `${languagesArray[0]}`;
+            else if (languages.length === 2) languagesString = `${languagesArray[0]} and ${languagesArray[1]}`;
+            else languagesString = `${languagesArray[0]}, ${languagesArray[1]} and ${languagesArray[2]}'s`;
+            // Create document fragment
+            const axiosSearchResponseList = document.createDocumentFragment();
+            // Implement flag into fragment
+            const elementFlag = document.createElement("img");
+            elementFlag.setAttribute("class", "flag");
+            elementFlag.setAttribute("src", flag);
+            axiosSearchResponseList.appendChild(elementFlag);
+            // Implement name into fragment
+            const elementName = document.createElement("h4");
+            elementName.textContent = name;
+            axiosSearchResponseList.appendChild(elementName);
+            // Implement String about subregion and population into fragment
+            const elementRegion = document.createElement("li");
+            elementRegion.textContent = `${name} is situated in ${subregion}. 
+                                         It has a population of ${population} people.`;
+            axiosSearchResponseList.appendChild(elementRegion);
+            // Implement capital into fragment
+            const elementCurrencies = document.createElement("li");
+            elementCurrencies.textContent = `The capital is ${capital} 
+                                             and you can pay with ${coinString}.`;
+            axiosSearchResponseList.appendChild(elementCurrencies);
+            // Implement language into fragment
+            const elementLanguage = document.createElement("li");
+            elementLanguage.textContent = `They speak ${languagesString}.`;
+            axiosSearchResponseList.appendChild(elementLanguage);
+            // Inject fragment into the DOM
+            const container = document.getElementById("search-ul");
+            container.appendChild(axiosSearchResponseList);
         });
-        // String builder for currencies
-        if (currencies.length === 1) coinString = `${currenciesArray[0]}`;
-        else coinString = `${currenciesArray[0]} and ${currenciesArray[1]}`;
-        // Iterate trough languages
-        let languagesString;
-        const languagesArray = languages.map((language)=>{
-            return language.name;
-        });
-        // String builder for language
-        if (languagesArray.length === 1) languagesString = `${languagesArray[0]}`;
-        else if (languages.length === 2) languagesString = `${languagesArray[0]} and ${languagesArray[1]}`;
-        else languagesString = `${languagesArray[0]}, ${languagesArray[1]} and ${languagesArray[2]}'s`;
-        // Create document fragment
-        const axiosSearchResponseList = document.createDocumentFragment();
-        // Implement flag into fragment
-        const elementFlag = document.createElement("img");
-        elementFlag.setAttribute("class", "flag");
-        elementFlag.setAttribute("src", flag);
-        axiosSearchResponseList.appendChild(elementFlag);
-        // Implement name into fragment
-        const elementName = document.createElement("li");
-        elementName.textContent = name;
-        axiosSearchResponseList.appendChild(elementName);
-        // Implement String about subregion and population into fragment
-        const elementRegion = document.createElement("li");
-        elementRegion.textContent = `${name} is situated in ${subregion}. 
-                                     It has a population of ${population} people.`;
-        axiosSearchResponseList.appendChild(elementRegion);
-        // Implement capital into fragment
-        const elementCurrencies = document.createElement("li");
-        elementCurrencies.textContent = `The capital is ${capital} and you can pay 
-                                         with ${coinString}`;
-        axiosSearchResponseList.appendChild(elementCurrencies);
-        // Implement language into fragment
-        const elementLanguage = document.createElement("li");
-        elementLanguage.textContent = `They speak ${languagesString}`;
-        axiosSearchResponseList.appendChild(elementLanguage);
-        // Inject fragment into the DOM
-        const container = document.getElementById("search-ul");
-        container.appendChild(axiosSearchResponseList);
-    });
+    } catch (error) {
+        const errorMessage1 = document.getElementById("error-search-msg");
+        if (error.status === 404) errorMessage1.textContent = "Page not found | 404";
+        if (error.status === 500) errorMessage1.textContent = "Internal server error | 500";
+    }
 }
 fetchSearchData();
 // Button function click handler
